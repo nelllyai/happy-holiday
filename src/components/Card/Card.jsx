@@ -1,17 +1,33 @@
-import Img from "./Img/Img";
+import ImageCard from "./ImageCard/ImageCard";
 import Felicitation from "./Felicitation/Felicitation";
 import style from './Card.module.css';
-import CardBG from '../../img/card-bg.jpg';
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchTextId } from "../../store/textSlice";
+import { fetchImageId } from "../../store/imageSlice";
 
-const Card = () => (
-    <div className={style.card}>
-        <div className={style.wrapper}>
-            <div className={style.image}>
-                <Img img={CardBG} />
-                <Felicitation />
+const Card = () => {
+    const { idText, idImg } = useParams();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (idText && idImg) {
+            dispatch(fetchTextId(idText));
+            dispatch(fetchImageId(idImg));
+        }
+    })
+
+    return (
+        <div className={style.card}>
+            <div className={style.wrapper}>
+                <div className={style.image}>
+                    <ImageCard />
+                    <Felicitation />
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default Card;

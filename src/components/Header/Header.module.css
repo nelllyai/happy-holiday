@@ -29,6 +29,10 @@
     color: #fff;
 }
 
+.button:disabled {
+    background-color: #617e75;
+}
+
 @media (max-width: 1024px) {
     .wrapper {
         flex-direction: column;
